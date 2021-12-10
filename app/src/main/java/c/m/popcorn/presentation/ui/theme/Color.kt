@@ -1,4 +1,4 @@
-package c.m.popcorn.ui.theme
+package c.m.popcorn.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
