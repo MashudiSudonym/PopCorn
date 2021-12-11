@@ -27,6 +27,7 @@ android {
         def baseURL = properties.getProperty('baseURL')
         def baseImageURL = properties.getProperty('baseImageURL')
         def key = properties.getProperty('APIKey')
+
         // Base URL for API
         buildConfigField "String", "BASE_URL_API", baseURL
         // Base URL for Image
