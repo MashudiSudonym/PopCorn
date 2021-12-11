@@ -2,7 +2,7 @@ package c.m.popcorn.data.remote.dto.movie.discover
 
 import com.google.gson.annotations.SerializedName
 
-data class ResultsDTO(
+data class MovieResultsDTO(
     @SerializedName("poster_path")
     val posterPath: String? = "",
     @SerializedName("adult")
