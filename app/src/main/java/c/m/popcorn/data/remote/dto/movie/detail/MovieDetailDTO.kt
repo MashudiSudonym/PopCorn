@@ -8,7 +8,7 @@ data class MovieDetailDTO(
     @SerializedName("backdrop_path")
     val backdropPath: String? = "",
     @SerializedName("belongs_to_collection")
-    val belongsToCollection: MovieBelongsToCollection = MovieBelongsToCollection(),
+    val belongsToCollection: MovieBelongsToCollectionDTO = MovieBelongsToCollectionDTO(),
     @SerializedName("budget")
     val budget: Int? = 0,
     @SerializedName("genres")
