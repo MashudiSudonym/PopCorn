@@ -6,7 +6,7 @@ data class MovieSearchDTO(
     @SerializedName("page")
     val page: Int? = 0,
     @SerializedName("results")
-    val results: List<MovieSearchResultsDTO> = emptyList(),
+    val results: List<MovieSearchResultsDTO>? = emptyList(),
     @SerializedName("total_results")
     val totalResults: Int? = 0,
     @SerializedName("total_pages")
