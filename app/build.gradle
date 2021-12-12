@@ -104,6 +104,7 @@ dependencies {
 
     // Room
     implementation "androidx.room:room-runtime:2.3.0"
+    annotationProcessor("androidx.room:room-compiler:2.3.0")
     kapt "androidx.room:room-compiler:2.3.0"
 
     // Kotlin Extensions and Coroutines support for Room
@@ -120,4 +121,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
+    testImplementation("androidx.room:room-testing:2.3.0")
 }
