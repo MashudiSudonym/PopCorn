@@ -10,5 +10,5 @@ data class MovieSearchResults(
     val releaseDate: String? = "",
     val voteAverage: Double? = 0.0,
     val voteCount: Int? = 0,
-    val adult: Boolean = false,
+    val adult: Boolean? = false,
 )
