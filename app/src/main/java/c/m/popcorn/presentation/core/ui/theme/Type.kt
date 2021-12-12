@@ -1,4 +1,4 @@
-package c.m.popcorn.presentation.ui.theme
+package c.m.popcorn.presentation.core.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
