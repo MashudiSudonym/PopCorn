@@ -7,7 +7,7 @@ data class MovieUpcomingDTO(
     @SerializedName("page")
     val page: Int? = 0,
     @SerializedName("results")
-    val results: List<MovieResultsDTO> = emptyList(),
+    val results: List<MovieUpcomingResultsDTO>? = emptyList(),
     @SerializedName("dates")
     val dates: MovieDatesDTO = MovieDatesDTO(),
     @SerializedName("total_pages")
