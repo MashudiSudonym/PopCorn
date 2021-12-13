@@ -3,19 +3,19 @@ package c.m.popcorn.data.local.movie.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
-import c.m.popcorn.data.local.movie.converter.Converters
 import c.m.popcorn.domain.model.movie.detail.MovieDetail
 import c.m.popcorn.domain.model.movie.detail.MovieGenres
 
 @Entity(tableName = "movie_detail")
 data class MovieDetailEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    @ColumnInfo(name = "_id")
+    val id: Long,
+    @ColumnInfo(name = "is_favorite")
+    val isFavorite: Boolean = false,
     @ColumnInfo(name = "backdrop_path")
     val backdropPath: String?,
     @ColumnInfo(name = "genres")
-    @TypeConverters(Converters::class)
     val genres: List<MovieGenres>,
     @ColumnInfo(name = "homepage")
     val homepage: String?,
