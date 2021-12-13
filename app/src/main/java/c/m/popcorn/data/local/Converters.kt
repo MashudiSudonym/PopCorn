@@ -1,4 +1,4 @@
-package c.m.popcorn.data.local.movie.converter
+package c.m.popcorn.data.local
 
 import androidx.room.TypeConverter
 import c.m.popcorn.data.util.JsonParser
