@@ -1,4 +1,4 @@
-package c.m.popcorn.data.local
+package c.m.popcorn.data.local.movie.converter
 
 import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
@@ -6,8 +6,7 @@ import c.m.popcorn.data.util.ListIntegerParser
 import com.google.gson.reflect.TypeToken
 
 @ProvidedTypeConverter
-class Converters(private val listIntegerParser: ListIntegerParser) {
-    // convert genre ids integer to list of integer / list of integer to integer
+class ListIntegerConverters(private val listIntegerParser: ListIntegerParser) {
     @TypeConverter
     fun restoreGenreIds(listOfInt: Int): List<Int> {
         return listIntegerParser.fromListInt<List<Int>>(
