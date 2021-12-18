@@ -7,13 +7,13 @@ import com.google.gson.reflect.TypeToken
 
 class Converters(private val jsonParser: JsonParser) {
     @TypeConverter
-    fun fromGenresJson(json: String): List<MovieGenres> {
+    fun fromJson(json: String): List<MovieGenres> {
         return jsonParser.fromJson(json, object : TypeToken<List<MovieGenres>>() {}.type)
             ?: emptyList()
     }
 
     @TypeConverter
-    fun toGenresJson(genres: List<MovieGenres>): String {
+    fun toJson(genres: List<MovieGenres>): String {
         return jsonParser.toJson(genres, object : TypeToken<List<MovieGenres>>() {}.type) ?: ""
     }
 }
