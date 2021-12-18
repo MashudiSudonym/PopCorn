@@ -10,13 +10,13 @@ import c.m.popcorn.domain.model.movie.detail.MovieGenres
 data class MovieDetailEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "_id")
-    val id: Long,
+    val id: Long = 0L,
     @ColumnInfo(name = "is_favorite")
     val isFavorite: Boolean = false,
     @ColumnInfo(name = "backdrop_path")
     val backdropPath: String?,
     @ColumnInfo(name = "genres")
-    val genres: List<MovieGenres>,
+    val genres: List<MovieGenres>?,
     @ColumnInfo(name = "homepage")
     val homepage: String?,
     @ColumnInfo(name = "movie_id")

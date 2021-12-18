@@ -1,5 +1,6 @@
 package c.m.popcorn.data.remote.dto.movie.detail
 
+import c.m.popcorn.data.local.movie.entity.MovieDetailEntity
 import com.google.gson.annotations.SerializedName
 
 data class MovieDetailDTO(
@@ -53,4 +54,23 @@ data class MovieDetailDTO(
     val voteAverage: Double? = 0.0,
     @SerializedName("vote_count")
     val voteCount: Int? = 0
-)
+) {
+    fun toMovieDetailEntity(): MovieDetailEntity {
+        return MovieDetailEntity(
+            backdropPath = backdropPath,
+            genres = genres?.map { it.toMovieGenres() },
+            homepage = homepage,
+            movieId = id,
+            imbdId = imdbId,
+            originalLanguage = originalLanguage,
+            originalTitle = originalTitle,
+            overview = overview,
+            popularity = popularity,
+            posterPath = posterPath,
+            status = status,
+            tagline = tagline,
+            voteAverage = voteAverage,
+            voteCount = voteCount
+        )
+    }
+}
