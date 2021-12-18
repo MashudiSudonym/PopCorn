@@ -1,5 +1,6 @@
 package c.m.popcorn.data.remote.dto.movie.discover
 
+import c.m.popcorn.domain.model.movie.discover.MovieResults
 import com.google.gson.annotations.SerializedName
 
 data class MovieResultsDTO(
@@ -31,4 +32,17 @@ data class MovieResultsDTO(
     val video: Boolean = false,
     @SerializedName("vote_average")
     val voteAverage: Double? = 0.0
-)
+) {
+    fun toMovieResults(): MovieResults {
+        return MovieResults(
+            posterPath = posterPath,
+            id = id,
+            originalTitle = originalTitle,
+            originalLanguage = originalLanguage,
+            popularity = popularity,
+            genreIds = genreIds?.map { it },
+            releaseDate = releaseDate,
+            voteAverage = voteAverage,
+        )
+    }
+}
