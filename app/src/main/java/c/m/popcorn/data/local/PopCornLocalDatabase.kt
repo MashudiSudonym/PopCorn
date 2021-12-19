@@ -10,7 +10,7 @@ import c.m.popcorn.data.local.movie.entity.MovieDetailEntity
     entities = [MovieDetailEntity::class],
     version = 1
 )
-@TypeConverters(Converters::class)
+@TypeConverters(MovieGenresConverters::class)
 abstract class PopCornLocalDatabase : RoomDatabase() {
     abstract val movieDao: MovieDao
 }

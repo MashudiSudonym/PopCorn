@@ -1,6 +1,6 @@
 package c.m.popcorn.data.remote.dto.movie.discover
 
-import c.m.popcorn.data.local.movie.entity.MovieDiscoverEntity
+import c.m.popcorn.domain.model.movie.discover.MovieDiscover
 import com.google.gson.annotations.SerializedName
 
 data class MovieDiscoverDTO(
@@ -13,11 +13,11 @@ data class MovieDiscoverDTO(
     @SerializedName("total_pages")
     val totalPages: Int? = 0
 ) {
-    fun toMovieDiscoverEntity(): MovieDiscoverEntity {
-        return MovieDiscoverEntity(
+    fun toMovieDiscover(): MovieDiscover {
+        return MovieDiscover(
             page = page,
             results = results?.map { it.toMovieResults() },
-            totalResults = totalResults,
+            totalResult = totalResults,
             totalPages = totalPages
         )
     }
