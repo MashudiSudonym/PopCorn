@@ -5,6 +5,7 @@ import androidx.room.Room
 import c.m.popcorn.common.Constants
 import c.m.popcorn.data.local.MovieGenresConverters
 import c.m.popcorn.data.local.PopCornLocalDatabase
+import c.m.popcorn.data.local.movie.MovieDao
 import c.m.popcorn.data.util.GsonParser
 import com.google.gson.Gson
 import dagger.Module
@@ -22,7 +23,13 @@ object PersistenceModule {
     fun providePopCornLocalDatabase(@ApplicationContext context: Context): PopCornLocalDatabase {
         return Room.databaseBuilder(context, PopCornLocalDatabase::class.java, Constants.POPCORN_DB)
             .addTypeConverter(MovieGenresConverters(GsonParser(Gson())))
-            .allowMainThreadQueries()
+            .fallbackToDestructiveMigration()
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideMovieDao(popCornLocalDatabase: PopCornLocalDatabase): MovieDao {
+        return popCornLocalDatabase.movieDao()
     }
 }
