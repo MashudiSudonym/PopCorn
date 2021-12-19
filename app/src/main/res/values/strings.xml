@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">PopCorn</string>
     <string name="error_unknown">error unknown</string>
+    <string name="oops">Oops, something went wrong!</string>
+    <string name="internet_problem">Couldn\'t reach server, check your internet connection.</string>
 </resources>

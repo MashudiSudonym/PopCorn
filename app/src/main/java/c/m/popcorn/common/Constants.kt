@@ -12,4 +12,5 @@ object Constants {
     const val BASE_URL_API = BuildConfig.BASE_URL_API
     const val BASE_URL_IMAGE = BuildConfig.BASE_URL_IMAGE
     const val TOKEN = BuildConfig.API_KEY
+    const val UNEXPECTED_ERROR = "An unexpected error occurred"
 }
