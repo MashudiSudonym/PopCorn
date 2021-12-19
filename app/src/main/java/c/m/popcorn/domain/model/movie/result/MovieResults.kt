@@ -1,8 +1,8 @@
-package c.m.popcorn.domain.model.movie.upcoming
+package c.m.popcorn.domain.model.movie.result
 
-data class MovieUpcomingResults(
+data class MovieResults(
     val posterPath: String? = "",
-    val id: String? = "",
+    val id: Int? = 0,
     val originalTitle: String? = "",
     val originalLanguage: String? = "",
     val popularity: Double? = 0.0,

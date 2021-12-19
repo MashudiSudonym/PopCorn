@@ -1,5 +1,7 @@
 package c.m.popcorn.domain.model.movie.discover
 
+import c.m.popcorn.domain.model.movie.result.MovieResults
+
 data class MovieDiscover(
     val page: Int? = 0,
     val results: List<MovieResults>? = emptyList(),

@@ -1,5 +1,6 @@
 package c.m.popcorn.data.remote.dto.movie.discover
 
+import c.m.popcorn.data.remote.dto.movie.result.MovieResultsDTO
 import c.m.popcorn.domain.model.movie.discover.MovieDiscover
 import com.google.gson.annotations.SerializedName
 
