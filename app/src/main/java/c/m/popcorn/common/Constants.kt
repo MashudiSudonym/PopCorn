@@ -1,5 +1,15 @@
 package c.m.popcorn.common
 
+import c.m.popcorn.BuildConfig
+
 object Constants {
     const val POPCORN_DB = "popcorn_db"
+    const val STARTING_PAGE_INDEX = 1
+    const val AUTHORIZATION = "Authorization"
+    const val PAGE = "page"
+    const val QUERY = "query"
+    const val MOVIE_ID = "movie_id"
+    const val BASE_URL_API = BuildConfig.BASE_URL_API
+    const val BASE_URL_IMAGE = BuildConfig.BASE_URL_IMAGE
+    const val TOKEN = BuildConfig.API_KEY
 }
