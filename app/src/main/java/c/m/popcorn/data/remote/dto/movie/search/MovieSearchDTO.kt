@@ -1,5 +1,6 @@
 package c.m.popcorn.data.remote.dto.movie.search
 
+import c.m.popcorn.domain.model.movie.search.MovieSearch
 import com.google.gson.annotations.SerializedName
 
 data class MovieSearchDTO(
@@ -11,4 +12,13 @@ data class MovieSearchDTO(
     val totalResults: Int? = 0,
     @SerializedName("total_pages")
     val totalPages: Int? = 0
-)
+) {
+    fun toMovieSearch(): MovieSearch {
+        return MovieSearch(
+            page = page,
+            results = results?.map { it.toMovieSearchResults() },
+            totalResult = totalResults,
+            totalPages = totalPages
+        )
+    }
+}
