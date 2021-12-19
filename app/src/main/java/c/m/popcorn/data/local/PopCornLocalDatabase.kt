@@ -4,6 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import c.m.popcorn.data.local.movie.MovieDao
+import c.m.popcorn.data.local.movie.MovieGenresConverters
 import c.m.popcorn.data.local.movie.entity.MovieDetailEntity
 
 @Database(

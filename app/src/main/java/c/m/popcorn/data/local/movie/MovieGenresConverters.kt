@@ -1,4 +1,4 @@
-package c.m.popcorn.data.local
+package c.m.popcorn.data.local.movie
 
 import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter

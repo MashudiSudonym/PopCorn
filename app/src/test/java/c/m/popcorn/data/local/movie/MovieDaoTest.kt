@@ -3,7 +3,6 @@ package c.m.popcorn.data.local.movie
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import c.m.popcorn.data.local.MovieGenresConverters
 import c.m.popcorn.data.local.PopCornLocalDatabase
 import c.m.popcorn.data.local.movie.entity.MovieDetailEntity
 import c.m.popcorn.data.util.GsonParser

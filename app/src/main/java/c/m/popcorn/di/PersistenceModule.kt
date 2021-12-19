@@ -3,7 +3,7 @@ package c.m.popcorn.di
 import android.content.Context
 import androidx.room.Room
 import c.m.popcorn.common.Constants
-import c.m.popcorn.data.local.MovieGenresConverters
+import c.m.popcorn.data.local.movie.MovieGenresConverters
 import c.m.popcorn.data.local.PopCornLocalDatabase
 import c.m.popcorn.data.local.movie.MovieDao
 import c.m.popcorn.data.util.GsonParser
