@@ -3,4 +3,6 @@
     <string name="error_unknown">error unknown</string>
     <string name="oops">Oops, something went wrong!</string>
     <string name="internet_problem">Couldn\'t reach server, check your internet connection.</string>
+    <string name="token_is_blank">Token is Blank</string>
+    <string name="movie_id_is_blank">Movie id is Blank</string>
 </resources>
