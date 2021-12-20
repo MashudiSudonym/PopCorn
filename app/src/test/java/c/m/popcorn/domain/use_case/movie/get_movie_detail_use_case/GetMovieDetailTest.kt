@@ -1,4 +1,4 @@
-package c.m.popcorn.domain.use_case.movie
+package c.m.popcorn.domain.use_case.movie.get_movie_detail_use_case
 
 import c.m.popcorn.R
 import c.m.popcorn.common.Constants
