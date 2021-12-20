@@ -10,7 +10,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class FakeMovieRepository : MovieRepository {
-    private val fakeMovieDetail = FakeDummyMovieData().fakeMovieDetail()
+    private val fakeLastSeenMovieData = FakeDummyMovieData().fakeLastSeenMovies()
+    private val fakeMovieDetailData = FakeDummyMovieData().fakeMovieDetail()
 
     override suspend fun getMovieDiscover(
         token: String,
@@ -31,11 +32,15 @@ class FakeMovieRepository : MovieRepository {
         return flow {
             emit(Resource.Loading())
 
-            emit(Resource.Success(fakeMovieDetail.toMovieDetail()))
+            emit(Resource.Success(fakeMovieDetailData.toMovieDetail()))
         }
     }
 
     override suspend fun getLastSeenMovies(): Flow<Resource<List<MovieDetail>>> {
-        TODO("Not yet implemented")
+        return flow {
+            emit(Resource.Loading())
+
+            emit(Resource.Success(fakeLastSeenMovieData))
+        }
     }
 }
