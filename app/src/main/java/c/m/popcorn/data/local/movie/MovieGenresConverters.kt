@@ -16,6 +16,6 @@ class MovieGenresConverters(private val jsonParser: JsonParser) {
 
     @TypeConverter
     fun toJson(genres: List<MovieGenres>): String {
-        return jsonParser.toJson(genres, object : TypeToken<List<MovieGenres>>() {}.type) ?: ""
+        return jsonParser.toJson(genres, object : TypeToken<List<MovieGenres>>() {}.type) ?: "[]"
     }
 }

@@ -9,7 +9,7 @@ interface MovieDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovieDetail(movieDetail: MovieDetailEntity)
 
-    @Query("DELETE FROM movie_detail WHERE movie_id = :movieId")
+    @Query("DELETE FROM movie_detail WHERE movie_id LIKE :movieId")
     suspend fun deleteMovieDetail(movieId: Int)
 
     @Transaction
@@ -21,6 +21,6 @@ interface MovieDao {
     @Query("SELECT * FROM movie_detail")
     suspend fun getLastSeenMovies(): List<MovieDetailEntity>
 
-    @Query("SELECT movie_id FROM movie_detail WHERE movie_id = :movieId")
+    @Query("SELECT movie_id FROM movie_detail WHERE movie_id LIKE :movieId")
     suspend fun getMovieDetail(movieId: Int): MovieDetailEntity
 }
