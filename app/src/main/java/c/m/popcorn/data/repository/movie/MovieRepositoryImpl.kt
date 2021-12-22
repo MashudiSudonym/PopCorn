@@ -57,7 +57,7 @@ class MovieRepositoryImpl(private val popCornApi: PopCornApi, private val movieD
             pagingSourceFactory = {
                 MoviePagingSource(
                     popCornApi = popCornApi,
-                    querySearch = Constants.IS_BLANK,
+                    querySearch = querySearch,
                     token = token,
                     page = page
                 )
@@ -65,8 +65,8 @@ class MovieRepositoryImpl(private val popCornApi: PopCornApi, private val movieD
         ).flow.flowOn(Dispatchers.IO)
     }
 
-    override suspend fun getMovieDetail(token: String, movieId: Int): Flow<Resource<MovieDetail>> =
-        flow {
+    override suspend fun getMovieDetail(token: String, movieId: Int): Flow<Resource<MovieDetail>> {
+        return flow {
             emit(Resource.Loading())
 
             val movieDetail = movieDao.getMovieDetail(movieId).toMovieDetail()
@@ -95,12 +95,15 @@ class MovieRepositoryImpl(private val popCornApi: PopCornApi, private val movieD
             val newMovieDetail = movieDao.getMovieDetail(movieId).toMovieDetail()
             emit(Resource.Success(newMovieDetail))
         }.flowOn(Dispatchers.IO)
+    }
 
-    override suspend fun getLastSeenMovies(): Flow<Resource<List<MovieDetail>>> = flow {
-        emit(Resource.Loading())
+    override suspend fun getLastSeenMovies(): Flow<Resource<List<MovieDetail>>> {
+        return flow {
+            emit(Resource.Loading())
 
-        val lastSeenMovies = movieDao.getLastSeenMovies().map { it.toMovieDetail() }
+            val lastSeenMovies = movieDao.getLastSeenMovies().map { it.toMovieDetail() }
 
-        emit(Resource.Success(lastSeenMovies))
-    }.flowOn(Dispatchers.IO)
+            emit(Resource.Success(lastSeenMovies))
+        }.flowOn(Dispatchers.IO)
+    }
 }
