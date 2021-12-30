@@ -14,4 +14,5 @@ object Constants {
     const val TOKEN = BuildConfig.API_KEY
     const val UNEXPECTED_ERROR = "An unexpected error occurred"
     const val IS_BLANK = ""
+    const val KEY_ROUTE = "key route"
 }
