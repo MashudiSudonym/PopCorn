@@ -3,6 +3,7 @@ package c.m.popcorn.presentation.core.main_screen
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -19,8 +20,8 @@ import c.m.popcorn.presentation.tv_show.TvShowScreen
 fun MainScreen() {
     val navHostController: NavHostController = rememberNavController()
     val bottomNavigationItems: List<BottomNavigationScreens> = listOf(
-        BottomNavigationScreens.Movie,
         BottomNavigationScreens.TvShow,
+        BottomNavigationScreens.Movie,
         BottomNavigationScreens.Favorite
     )
 
@@ -42,11 +43,11 @@ private fun MainScreenNavigationConfigurations(navHostController: NavHostControl
         navController = navHostController,
         startDestination = BottomNavigationScreens.Movie.route
     ) {
-        composable(BottomNavigationScreens.Movie.route) {
-            MovieScreen()
-        }
         composable(BottomNavigationScreens.TvShow.route) {
             TvShowScreen()
+        }
+        composable(BottomNavigationScreens.Movie.route) {
+            MovieScreen()
         }
         composable(BottomNavigationScreens.Favorite.route) {
             FavoriteScreen()
@@ -62,6 +63,7 @@ private fun PopCornAppBottomNavigation(
     BottomNavigation {
         val navBackStackEntry by navHostController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
+
         items.forEach { screen ->
             BottomNavigationItem(
                 icon = {
@@ -74,7 +76,8 @@ private fun PopCornAppBottomNavigation(
                     Text(text = stringResource(id = screen.resourceId))
                 },
                 selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
-                selectedContentColor = MaterialTheme.colors.primary,
+                selectedContentColor = Color.White,
+                unselectedContentColor = Color.White.copy(0.4f),
                 alwaysShowLabel = true,
                 onClick = {
                     navHostController.navigate(screen.route) {
