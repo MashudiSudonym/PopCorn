@@ -9,7 +9,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import c.m.popcorn.R
 
 sealed class BottomNavigationScreens(val route: String, @StringRes val resourceId: Int, val icon: ImageVector) {
-    object Movie: BottomNavigationScreens("Movie", R.string.movie_title, Icons.Filled.Movie)
     object TvShow: BottomNavigationScreens("TV Show", R.string.tv_show_title, Icons.Filled.Tv)
+    object Movie: BottomNavigationScreens("Movie", R.string.movie_title, Icons.Filled.Movie)
     object Favorite: BottomNavigationScreens("Favorite", R.string.favorite_title, Icons.Filled.Favorite)
 }
