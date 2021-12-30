@@ -12,6 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import c.m.popcorn.presentation.core.ui.theme.Red500
 import c.m.popcorn.presentation.favorite.FavoriteScreen
 import c.m.popcorn.presentation.movie.MovieScreen
 import c.m.popcorn.presentation.tv_show.TvShowScreen
@@ -60,7 +61,7 @@ private fun PopCornAppBottomNavigation(
     navHostController: NavHostController,
     items: List<BottomNavigationScreens>
 ) {
-    BottomNavigation {
+    BottomNavigation(backgroundColor = Red500) {
         val navBackStackEntry by navHostController.currentBackStackEntryAsState()
         val currentDestination = navBackStackEntry?.destination
 
