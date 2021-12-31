@@ -14,5 +14,9 @@ object Constants {
     const val TOKEN = BuildConfig.API_KEY
     const val UNEXPECTED_ERROR = "An unexpected error occurred"
     const val IS_BLANK = ""
-    const val KEY_ROUTE = "key route"
+    const val MOVIE = "Movie"
+    const val MOVIE_DETAIL = "Movie Detail"
+    const val TV_SHOW = "Tv Show"
+    const val TV_SHOW_DETAIL = "Tv Show Detail"
+    const val FAVORITE = "Favorite"
 }

@@ -1,4 +1,4 @@
-package c.m.popcorn.presentation.core.main_screen
+package c.m.popcorn.presentation.core.main
 
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -12,10 +12,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import c.m.popcorn.presentation.core.navigation.BottomNavigationScreens
 import c.m.popcorn.presentation.core.ui.theme.Red500
 import c.m.popcorn.presentation.favorite.FavoriteScreen
 import c.m.popcorn.presentation.movie.MovieScreen
 import c.m.popcorn.presentation.tv_show.TvShowScreen
+import com.google.accompanist.insets.ProvideWindowInsets
 
 @Composable
 fun MainScreen() {
@@ -34,7 +36,9 @@ fun MainScreen() {
             )
         }
     ) {
-        MainScreenNavigationConfigurations(navHostController = navHostController)
+        ProvideWindowInsets {
+            MainScreenNavigationConfigurations(navHostController = navHostController)
+        }
     }
 }
 
