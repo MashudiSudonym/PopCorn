@@ -77,6 +77,13 @@ dependencies {
     // internal logging
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
+    // compose image loading
+    implementation "com.github.skydoves:landscapist-coil:1.4.4"
+
+    // compose insets
+    implementation "com.google.accompanist:accompanist-insets:0.22.0-rc"
+    implementation "com.google.accompanist:accompanist-flowlayout:0.22.0-rc"
+
     // Other Compose dependencies
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0"
     implementation "androidx.paging:paging-compose:1.0.0-alpha14"
