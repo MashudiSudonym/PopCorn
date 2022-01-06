@@ -12,6 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import c.m.popcorn.common.Constants
 import c.m.popcorn.presentation.core.navigation.BottomNavigationScreens
 import c.m.popcorn.presentation.core.ui.theme.Red500
 import c.m.popcorn.presentation.favorite.FavoriteScreen
@@ -51,7 +52,7 @@ private fun MainScreenNavigationConfigurations(navHostController: NavHostControl
         startDestination = BottomNavigationScreens.Movie.route
     ) {
         composable(BottomNavigationScreens.Movie.route) {
-            MovieScreen()
+            MovieScreen(Constants.MOVIE)
         }
         composable(BottomNavigationScreens.TvShow.route) {
             TvShowScreen()
