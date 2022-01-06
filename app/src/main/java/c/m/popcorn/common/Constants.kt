@@ -19,4 +19,5 @@ object Constants {
     const val TV_SHOW = "Tv Show"
     const val TV_SHOW_DETAIL = "Tv Show Detail"
     const val FAVORITE = "Favorite"
+    const val SEARCH = "Search"
 }

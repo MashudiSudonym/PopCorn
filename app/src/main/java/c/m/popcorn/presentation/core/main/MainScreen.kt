@@ -16,6 +16,7 @@ import c.m.popcorn.presentation.core.navigation.BottomNavigationScreens
 import c.m.popcorn.presentation.core.ui.theme.Red500
 import c.m.popcorn.presentation.favorite.FavoriteScreen
 import c.m.popcorn.presentation.movie.MovieScreen
+import c.m.popcorn.presentation.search.SearchScreen
 import c.m.popcorn.presentation.tv_show.TvShowScreen
 import com.google.accompanist.insets.ProvideWindowInsets
 
@@ -23,9 +24,10 @@ import com.google.accompanist.insets.ProvideWindowInsets
 fun MainScreen() {
     val navHostController: NavHostController = rememberNavController()
     val bottomNavigationItems: List<BottomNavigationScreens> = listOf(
-        BottomNavigationScreens.TvShow,
         BottomNavigationScreens.Movie,
-        BottomNavigationScreens.Favorite
+        BottomNavigationScreens.TvShow,
+        BottomNavigationScreens.Favorite,
+        BottomNavigationScreens.Search,
     )
 
     Scaffold(
@@ -48,14 +50,17 @@ private fun MainScreenNavigationConfigurations(navHostController: NavHostControl
         navController = navHostController,
         startDestination = BottomNavigationScreens.Movie.route
     ) {
-        composable(BottomNavigationScreens.TvShow.route) {
-            TvShowScreen()
-        }
         composable(BottomNavigationScreens.Movie.route) {
             MovieScreen()
         }
+        composable(BottomNavigationScreens.TvShow.route) {
+            TvShowScreen()
+        }
         composable(BottomNavigationScreens.Favorite.route) {
             FavoriteScreen()
+        }
+        composable(BottomNavigationScreens.Search.route) {
+            SearchScreen()
         }
     }
 }
