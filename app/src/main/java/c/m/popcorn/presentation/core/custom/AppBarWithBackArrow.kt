@@ -44,14 +44,11 @@ fun AppBarWithArrow(title: String?, pressOnBack: () -> Unit) {
 
             Spacer(modifier = Modifier.width(16.dp))
 
-            Text(
+            AppBarTitleText(
+                title = title ?: stringResource(id = R.string.content_detail),
                 modifier = Modifier
                     .padding(4.dp)
                     .align(Alignment.CenterVertically),
-                text = title ?: stringResource(id = R.string.content_detail),
-                color = Color.White,
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold
             )
         }
     }
@@ -61,6 +58,6 @@ fun AppBarWithArrow(title: String?, pressOnBack: () -> Unit) {
 @Preview(name = "App Bar with Back Arrow")
 fun AppBarWithArrowPreview() {
     PopCornTheme {
-        AppBarWithArrow(title = "Movie Detail") {}
+        AppBarWithArrow(title = stringResource(id = R.string.content_detail)) {}
     }
 }
