@@ -52,16 +52,16 @@ private fun MainScreenNavigationConfigurations(navHostController: NavHostControl
         startDestination = BottomNavigationScreens.Movie.route
     ) {
         composable(BottomNavigationScreens.Movie.route) {
-            MovieScreen(Constants.MOVIE)
+            MovieScreen(Constants.MOVIE, BottomNavigationScreens.Movie.icon)
         }
         composable(BottomNavigationScreens.TvShow.route) {
-            TvShowScreen(Constants.TV_SHOW)
+            TvShowScreen(Constants.TV_SHOW, BottomNavigationScreens.TvShow.icon)
         }
         composable(BottomNavigationScreens.Favorite.route) {
-            FavoriteScreen(Constants.FAVORITE)
+            FavoriteScreen(Constants.FAVORITE, BottomNavigationScreens.Favorite.icon)
         }
         composable(BottomNavigationScreens.Search.route) {
-            SearchScreen(Constants.SEARCH)
+            SearchScreen(Constants.SEARCH, BottomNavigationScreens.Search.icon)
         }
     }
 }

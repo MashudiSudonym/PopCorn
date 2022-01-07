@@ -2,24 +2,19 @@ package c.m.popcorn.presentation.search
 
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import c.m.popcorn.R
-import c.m.popcorn.common.Constants
-import c.m.popcorn.presentation.core.custom.MainAppBar
-import c.m.popcorn.presentation.core.ui.theme.PopCornTheme
+import c.m.popcorn.presentation.core.custom.DefaultAppBar
 
 @Composable
-fun SearchScreen(title: String?) {
-    Scaffold(topBar = { MainAppBar(title = title ?: stringResource(id = R.string.app_name)) }) {
+fun SearchScreen(title: String?, icon: ImageVector) {
+    Scaffold(topBar = {
+        DefaultAppBar(
+            title = title ?: stringResource(id = R.string.app_name),
+            icon = icon
+        )
+    }) {
 
-    }
-}
-
-@Composable
-@Preview(name = "Search Screen")
-fun SearchScreenPreview() {
-    PopCornTheme() {
-        SearchScreen(title = Constants.SEARCH)
     }
 }
