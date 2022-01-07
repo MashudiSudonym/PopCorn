@@ -9,6 +9,7 @@ import androidx.compose.material.icons.filled.Movie
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,7 +27,12 @@ fun DefaultAppBar(title: String?, icon: ImageVector) {
         Row {
             Spacer(modifier = Modifier.width(16.dp))
 
-            Icon(imageVector = icon, contentDescription = null)
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                modifier = Modifier.align(Alignment.CenterVertically),
+                tint = Color.White
+            )
 
             Spacer(modifier = Modifier.width(16.dp))
 
