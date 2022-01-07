@@ -3,6 +3,7 @@ package c.m.popcorn.presentation.core.custom
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
@@ -25,7 +26,7 @@ import c.m.popcorn.presentation.core.ui.theme.Red500
 fun AppBarWithArrow(title: String?, pressOnBack: () -> Unit) {
     TopAppBar(
         elevation = 6.dp,
-        backgroundColor = Red500,
+        backgroundColor = MaterialTheme.colors.primary,
         modifier = Modifier.height(64.dp)
     ) {
         Row {
