@@ -1,25 +1,99 @@
 package c.m.popcorn.presentation.movie
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
+import androidx.compose.material.ScaffoldState
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import c.m.popcorn.R
-import c.m.popcorn.common.Constants
-import c.m.popcorn.presentation.core.custom.MainAppBar
-import c.m.popcorn.presentation.core.ui.theme.PopCornTheme
+import c.m.popcorn.presentation.core.custom.DefaultAppBar
+import c.m.popcorn.presentation.core.custom.LoadingIndicator
+import c.m.popcorn.presentation.core.custom.TextContentTitle
+import c.m.popcorn.util.UIEvent
+import kotlinx.coroutines.flow.collectLatest
 
 @Composable
-fun MovieScreen(title: String?) {
-    Scaffold(topBar = { MainAppBar(title = title ?: stringResource(id = R.string.app_name)) }) {
+fun MovieScreen(title: String?, icon: ImageVector) {
+    val movieViewModel: MovieViewModel = hiltViewModel()
+    val movieListState = movieViewModel.movieListState.value
+    val movieLastSeenListState = movieViewModel.movieLastSeenState.value
+    val movieIsRefreshState = movieViewModel.movieIsRefreshState.value
+    val scaffoldState = rememberScaffoldState()
 
+    LaunchEffect(movieViewModel, scaffoldState)
+
+    Scaffold(
+        scaffoldState = scaffoldState,
+        topBar = {
+            DefaultAppBar(
+                title = title ?: stringResource(id = R.string.app_name),
+                icon = icon
+            )
+        }) {
+        Box(modifier = Modifier.background(MaterialTheme.colors.background)) {
+            Column(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                // Last Seen Movies
+                if (movieLastSeenListState.lastSeenItems.isNotEmpty()) {
+                    LastSeenMovies(movieLastSeenListState)
+
+                    Spacer(modifier = Modifier.height(16.dp))
+                }
+
+                // List Movies
+                ListMovies(movieListState)
+            }
+        }
     }
 }
 
 @Composable
-@Preview(name = "Movie Screen")
-fun MovieScreenPreview() {
-    PopCornTheme() {
-        MovieScreen(title = Constants.MOVIE)
+private fun ListMovies(movieListState: MovieListState) {
+    TextContentTitle(title = "List Movies")
+
+    Spacer(modifier = Modifier.height(16.dp))
+
+    if (movieListState.isLoading) {
+        LoadingIndicator()
+    }
+}
+
+@Composable
+private fun LastSeenMovies(movieLastSeenListState: MovieLastSeenListState) {
+    TextContentTitle(title = "Last Seen Movies")
+
+    Spacer(modifier = Modifier.width(16.dp))
+
+    if (movieLastSeenListState.isLoading) {
+        LoadingIndicator()
+    }
+}
+
+@Composable
+private fun LaunchEffect(
+    movieViewModel: MovieViewModel,
+    scaffoldState: ScaffoldState
+) {
+    LaunchedEffect(key1 = true) {
+        movieViewModel.eventFlow.collectLatest { event ->
+            when (event) {
+                is UIEvent.ShowSnackbar -> scaffoldState.snackbarHostState.showSnackbar(
+                    message = event.message
+                )
+            }
+        }
     }
 }

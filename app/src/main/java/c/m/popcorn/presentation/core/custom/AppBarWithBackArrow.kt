@@ -26,7 +26,7 @@ import c.m.popcorn.presentation.core.ui.theme.Red500
 fun AppBarWithArrow(title: String?, pressOnBack: () -> Unit) {
     TopAppBar(
         elevation = 6.dp,
-        backgroundColor = MaterialTheme.colors.primary,
+        backgroundColor = Red500,
         modifier = Modifier.height(64.dp)
     ) {
         Row {

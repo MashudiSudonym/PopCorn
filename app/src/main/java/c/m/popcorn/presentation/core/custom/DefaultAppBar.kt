@@ -16,12 +16,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import c.m.popcorn.R
 import c.m.popcorn.presentation.core.ui.theme.PopCornTheme
+import c.m.popcorn.presentation.core.ui.theme.Red500
 
 @Composable
 fun DefaultAppBar(title: String?, icon: ImageVector) {
     TopAppBar(
         elevation = 6.dp,
-        backgroundColor = MaterialTheme.colors.primary,
+        backgroundColor = Red500,
         modifier = Modifier.height(64.dp),
     ) {
         Row {
