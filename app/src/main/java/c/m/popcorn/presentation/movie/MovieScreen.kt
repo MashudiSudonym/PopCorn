@@ -8,8 +8,11 @@ import androidx.compose.material.ScaffoldState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -19,17 +22,20 @@ import c.m.popcorn.presentation.core.custom.DefaultAppBar
 import c.m.popcorn.presentation.core.custom.LoadingIndicator
 import c.m.popcorn.presentation.core.custom.TextContentTitle
 import c.m.popcorn.util.UIEvent
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun MovieScreen(title: String?, icon: ImageVector) {
     val movieViewModel: MovieViewModel = hiltViewModel()
-    val movieListState = movieViewModel.movieListState.value
-    val movieLastSeenListState = movieViewModel.movieLastSeenState.value
-    val movieIsRefreshState = movieViewModel.movieIsRefreshState.value
+    val movieListState by movieViewModel.movieListState.collectAsState()
+    val movieLastSeenListState by movieViewModel.movieLastSeenState.collectAsState()
+    val movieIsRefreshState by movieViewModel.movieIsRefreshState.collectAsState()
     val scaffoldState = rememberScaffoldState()
 
-    LaunchEffect(movieViewModel, scaffoldState)
+    SnackbarLaunchEffect(movieViewModel, scaffoldState)
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -38,24 +44,48 @@ fun MovieScreen(title: String?, icon: ImageVector) {
                 title = title ?: stringResource(id = R.string.app_name),
                 icon = icon
             )
-        }) {
-        Box(modifier = Modifier.background(MaterialTheme.colors.background)) {
-            Column(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                // Last Seen Movies
-                if (movieLastSeenListState.lastSeenItems.isNotEmpty()) {
-                    LastSeenMovies(movieLastSeenListState)
+        },
+        modifier = Modifier.fillMaxSize()
+    ) {
+        SwipeRefresh(
+            state = rememberSwipeRefreshState(isRefreshing = movieIsRefreshState),
+            indicator = { state, refreshTrigger ->
+                SwipeRefreshIndicator(
+                    state = state,
+                    refreshTriggerDistance = refreshTrigger,
+                    scale = true,
+                    backgroundColor = Color.Transparent
+                )
+            },
+            onRefresh = {
+                movieViewModel.isRefreshing()
+            }) {
+            MovieContents(movieLastSeenListState, movieListState)
+        }
+    }
+}
 
-                    Spacer(modifier = Modifier.height(16.dp))
-                }
+@Composable
+private fun MovieContents(
+    movieLastSeenListState: MovieLastSeenListState,
+    movieListState: MovieListState
+) {
+    Box(modifier = Modifier.background(MaterialTheme.colors.background)) {
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            // Last Seen Movies
+            if (movieLastSeenListState.lastSeenItems.isNotEmpty()) {
+                LastSeenMovies(movieLastSeenListState)
 
-                // List Movies
-                ListMovies(movieListState)
+                Spacer(modifier = Modifier.height(16.dp))
             }
+
+            // List Movies
+            ListMovies(movieListState)
         }
     }
 }
@@ -83,7 +113,7 @@ private fun LastSeenMovies(movieLastSeenListState: MovieLastSeenListState) {
 }
 
 @Composable
-private fun LaunchEffect(
+private fun SnackbarLaunchEffect(
     movieViewModel: MovieViewModel,
     scaffoldState: ScaffoldState
 ) {
