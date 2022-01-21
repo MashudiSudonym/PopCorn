@@ -22,9 +22,6 @@ import c.m.popcorn.presentation.core.custom.DefaultAppBar
 import c.m.popcorn.presentation.core.custom.LoadingIndicator
 import c.m.popcorn.presentation.core.custom.TextContentTitle
 import c.m.popcorn.util.UIEvent
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
