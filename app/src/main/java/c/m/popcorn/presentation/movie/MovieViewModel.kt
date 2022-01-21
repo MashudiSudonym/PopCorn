@@ -23,38 +23,10 @@ class MovieViewModel @Inject constructor(
     private val _movieLastSeenState = MutableStateFlow(MovieLastSeenListState())
     val movieLastSeenState: StateFlow<MovieLastSeenListState> = _movieLastSeenState.asStateFlow()
 
-    private val _movieIsRefreshState = MutableStateFlow(false)
-    val movieIsRefreshState: StateFlow<Boolean> = _movieIsRefreshState.asStateFlow()
-
     private val _eventFlow = MutableSharedFlow<UIEvent>()
     val eventFlow: SharedFlow<UIEvent> = _eventFlow.asSharedFlow()
 
     init {
-        viewModelScope.launch {
-            _movieListState.update {
-                it.copy(isLoading = true)
-            }
-            delay(2000)
-            _movieListState.update {
-                it.copy(isLoading = false)
-            }
-        }
-    }
-
-    fun isRefreshing() {
-        Timber.d("It's WORK!!")
-        viewModelScope.launch {
-            isRefreshingUpdateState(true)
-            movieListLoadingUpdateState(true)
-            movieLastSeenListLoadingUpdateState(true)
-            delay(2000)
-            isRefreshingUpdateState(false)
-            movieListLoadingUpdateState(false)
-            movieLastSeenListLoadingUpdateState(false)
-
-            // TODO : Get data again here!
-        }
-
 
     }
 
@@ -66,7 +38,6 @@ class MovieViewModel @Inject constructor(
 
     }
 
-    private suspend fun isRefreshingUpdateState(status: Boolean) = _movieIsRefreshState.emit(status)
     private fun movieListLoadingUpdateState(status: Boolean) {
         _movieListState.update {
             it.copy(isLoading = false)

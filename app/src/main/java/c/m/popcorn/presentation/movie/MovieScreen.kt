@@ -32,7 +32,6 @@ fun MovieScreen(title: String?, icon: ImageVector) {
     val movieViewModel: MovieViewModel = hiltViewModel()
     val movieListState by movieViewModel.movieListState.collectAsState()
     val movieLastSeenListState by movieViewModel.movieLastSeenState.collectAsState()
-    val movieIsRefreshState by movieViewModel.movieIsRefreshState.collectAsState()
     val scaffoldState = rememberScaffoldState()
 
     SnackbarLaunchEffect(movieViewModel, scaffoldState)
@@ -47,21 +46,7 @@ fun MovieScreen(title: String?, icon: ImageVector) {
         },
         modifier = Modifier.fillMaxSize()
     ) {
-        SwipeRefresh(
-            state = rememberSwipeRefreshState(isRefreshing = movieIsRefreshState),
-            indicator = { state, refreshTrigger ->
-                SwipeRefreshIndicator(
-                    state = state,
-                    refreshTriggerDistance = refreshTrigger,
-                    scale = true,
-                    backgroundColor = Color.Transparent
-                )
-            },
-            onRefresh = {
-                movieViewModel.isRefreshing()
-            }) {
-            MovieContents(movieLastSeenListState, movieListState)
-        }
+        MovieContents(movieLastSeenListState, movieListState)
     }
 }
 

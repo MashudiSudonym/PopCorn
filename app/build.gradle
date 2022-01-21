@@ -82,7 +82,6 @@ dependencies {
 
     // google accompanist
     implementation "com.google.accompanist:accompanist-insets:0.22.0-rc"
-    implementation "com.google.accompanist:accompanist-swiperefresh:0.22.0-rc"
 
     // Other Compose dependencies
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0"
