@@ -1,7 +1,7 @@
 package c.m.popcorn.dummy
 
-import c.m.popcorn.data.local.movie.entity.MovieDetailEntity
-import c.m.popcorn.domain.model.movie.detail.MovieDetail
+import c.m.popcorn.movie.data.local.entity.MovieDetailEntity
+import c.m.popcorn.movie.domain.model.detail.MovieDetail
 
 class FakeDummyMovieData {
     private val fakeLastSeenMoviesData: ArrayList<MovieDetail> = arrayListOf()
