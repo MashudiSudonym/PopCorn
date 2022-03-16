@@ -1,4 +1,4 @@
-package c.m.popcorn.movie.presentation
+package c.m.popcorn.movie.presentation.state
 
 import c.m.popcorn.movie.domain.model.detail.MovieDetail
 

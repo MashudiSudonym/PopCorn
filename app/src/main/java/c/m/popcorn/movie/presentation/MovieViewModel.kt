@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import c.m.popcorn.movie.domain.use_case.get_last_seen_movies_use_case.GetLastSeenMoviesUseCase
 import c.m.popcorn.movie.domain.use_case.get_movie_discover_use_case.GetMovieDiscoverUseCase
 import c.m.popcorn.core.util.UIEvent
+import c.m.popcorn.movie.presentation.state.MovieLastSeenListState
+import c.m.popcorn.movie.presentation.state.MovieListState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject

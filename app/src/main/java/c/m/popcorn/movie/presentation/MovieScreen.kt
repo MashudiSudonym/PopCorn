@@ -21,6 +21,8 @@ import c.m.popcorn.core.presentation.custom.DefaultAppBar
 import c.m.popcorn.core.presentation.custom.LoadingIndicator
 import c.m.popcorn.core.presentation.custom.TextContentTitle
 import c.m.popcorn.core.util.UIEvent
+import c.m.popcorn.movie.presentation.state.MovieLastSeenListState
+import c.m.popcorn.movie.presentation.state.MovieListState
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
