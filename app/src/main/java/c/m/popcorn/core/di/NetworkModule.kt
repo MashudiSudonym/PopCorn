@@ -1,5 +1,6 @@
 package c.m.popcorn.core.di
 
+import c.m.popcorn.BuildConfig
 import c.m.popcorn.core.common.Constants
 import c.m.popcorn.core.data.remote.PopCornApi
 import dagger.Module
@@ -16,21 +17,27 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
     @Provides
-    @Singleton
-    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BODY
-    }
+    fun provideBaseUrlApi(): String = Constants.BASE_URL_API
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
-        OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build()
+    fun provideOkHttpClient(): OkHttpClient = if (BuildConfig.DEBUG) {
+            val loggingInterceptor = HttpLoggingInterceptor()
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+            OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor)
+                .build()
+        } else {
+            OkHttpClient
+                .Builder()
+                .build()
+        }
 
     @Provides
     @Singleton
-    fun providePopCornApi(okHttpClient: OkHttpClient): PopCornApi {
+    fun providePopCornApi(okHttpClient: OkHttpClient, baseUrlApi: String): PopCornApi {
         return Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL_API)
+            .baseUrl(baseUrlApi)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
