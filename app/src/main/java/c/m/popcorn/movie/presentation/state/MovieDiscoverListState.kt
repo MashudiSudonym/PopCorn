@@ -7,5 +7,6 @@ import kotlinx.coroutines.flow.emptyFlow
 
 data class MovieDiscoverListState(
     val isLoading: Boolean = false,
+    val isError: Boolean = false,
     val movieDiscoverItems: Flow<PagingData<MovieResults>> = emptyFlow()
 )
