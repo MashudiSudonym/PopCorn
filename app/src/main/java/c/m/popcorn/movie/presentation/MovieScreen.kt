@@ -31,19 +31,15 @@ fun MovieScreen(title: String?, icon: ImageVector) {
     val movieViewModel: MovieViewModel = hiltViewModel()
     val movieDiscoverListState by movieViewModel.movieDiscoverState.collectAsState()
     val movieLastSeenListState by movieViewModel.movieLastSeenState.collectAsState()
-    val scaffoldState = rememberScaffoldState()
-
-    SnackbarLaunchEffect(movieViewModel, scaffoldState)
 
     Scaffold(
-        scaffoldState = scaffoldState,
         topBar = {
             DefaultAppBar(
                 title = title ?: stringResource(id = R.string.app_name),
                 icon = icon
             )
         },
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.padding(bottom = 56.dp)
     ) {
         MovieContents(movieLastSeenListState, movieDiscoverListState)
     }
@@ -54,10 +50,11 @@ private fun MovieContents(
     movieLastSeenListState: MovieLastSeenListState,
     movieDiscoverListState: MovieDiscoverListState
 ) {
-    Box(modifier = Modifier.background(MaterialTheme.colors.background)) {
+    Box(modifier = Modifier
+        .background(MaterialTheme.colors.background)) {
         Column(
             modifier = Modifier
-                .padding(16.dp)
+                .padding(top = 16.dp, start = 16.dp, end = 16.dp)
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -80,10 +77,13 @@ private fun DiscoverMovies(movieDiscoverListState: MovieDiscoverListState) {
 
     Spacer(modifier = Modifier.height(16.dp))
 
-    if (movieDiscoverListState.isLoading) {
-        LoadingIndicator()
-    }else {
-        MovieListItems(items = movieDiscoverListState.movieDiscoverItems.collectAsLazyPagingItems())
+    val movieDiscoverItems = movieDiscoverListState.movieDiscoverItems.collectAsLazyPagingItems()
+
+    when {
+        movieDiscoverListState.isLoading -> LoadingIndicator()
+        movieDiscoverListState.isError -> TextContentTitle(title = "Error")
+        movieDiscoverItems.itemCount == 0 -> TextContentTitle(title = "No Data")
+        else -> MovieListItems(items = movieDiscoverItems)
     }
 }
 
@@ -95,21 +95,5 @@ private fun LastSeenMovies(movieLastSeenListState: MovieLastSeenListState) {
 
     if (movieLastSeenListState.isLoading) {
         LoadingIndicator()
-    }
-}
-
-@Composable
-private fun SnackbarLaunchEffect(
-    movieViewModel: MovieViewModel,
-    scaffoldState: ScaffoldState
-) {
-    LaunchedEffect(key1 = true) {
-        movieViewModel.eventFlow.collectLatest { event ->
-            when (event) {
-                is UIEvent.ShowSnackbar -> scaffoldState.snackbarHostState.showSnackbar(
-                    message = event.message
-                )
-            }
-        }
     }
 }
