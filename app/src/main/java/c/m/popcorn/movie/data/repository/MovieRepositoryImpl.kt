@@ -3,9 +3,7 @@ package c.m.popcorn.movie.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.paging.map
 import c.m.popcorn.R
-import c.m.popcorn.core.common.Constants
 import c.m.popcorn.core.common.Resource
 import c.m.popcorn.core.data.remote.PopCornApi
 import c.m.popcorn.core.util.UIText
@@ -14,61 +12,55 @@ import c.m.popcorn.movie.data.paging.MoviePagingSource
 import c.m.popcorn.movie.domain.model.detail.MovieDetail
 import c.m.popcorn.movie.domain.model.result.MovieResults
 import c.m.popcorn.movie.domain.repository.MovieRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
 import retrofit2.HttpException
 import java.io.IOException
+import java.net.UnknownHostException
 
 class MovieRepositoryImpl(private val popCornApi: PopCornApi, private val movieDao: MovieDao) :
     MovieRepository {
     override suspend fun getMovieDiscover(
         token: String,
         page: Int
-    ): Flow<PagingData<MovieResults>> {
-        val totalPages = popCornApi.movieDiscover(token, page).toMovieDiscover()
+    ): Flow<Resource<Flow<PagingData<MovieResults>>>> =
+        flow<Resource<Flow<PagingData<MovieResults>>>> {
+            emit(Resource.Loading())
 
-        return Pager(config = PagingConfig(
-            pageSize = totalPages.totalPages ?: page,
-            enablePlaceholders = false
-        ),
-            pagingSourceFactory = {
-                MoviePagingSource(
-                    popCornApi = popCornApi,
-                    querySearch = Constants.IS_BLANK,
-                    token = token,
-                    page = page
+            try {
+                val pagingData = Pager(config = PagingConfig(pageSize = 2),
+                    pagingSourceFactory = {
+                        MoviePagingSource(
+                            popCornApi = popCornApi,
+                            token = token
+                        )
+                    }
+                ).flow
+
+                emit(Resource.Success(pagingData))
+            } catch (e: HttpException) {
+                emit(
+                    Resource.Error(
+                        message = UIText.StringResource(R.string.oops)
+                    )
+                )
+            } catch (e: IOException) {
+                emit(
+                    Resource.Error(
+                        message = UIText.StringResource(R.string.internet_problem)
+                    )
+                )
+            } catch (e: UnknownHostException) {
+                emit(
+                    Resource.Error(
+                        message = UIText.StringResource(R.string.internet_problem)
+                    )
                 )
             }
-        ).flow.flowOn(Dispatchers.IO)
-    }
+        }
 
-    override suspend fun getSearchMovies(
-        token: String,
-        querySearch: String,
-        page: Int
-    ): Flow<PagingData<MovieResults>> {
-        val totalPages = popCornApi.searchMovies(token, querySearch, page).toMovieSearch()
-
-        return Pager(config = PagingConfig(
-            pageSize = totalPages.totalPages ?: page,
-            enablePlaceholders = false
-        ),
-            pagingSourceFactory = {
-                MoviePagingSource(
-                    popCornApi = popCornApi,
-                    querySearch = querySearch,
-                    token = token,
-                    page = page
-                )
-            }
-        ).flow.flowOn(Dispatchers.IO)
-    }
-
-    override suspend fun getMovieDetail(token: String, movieId: Int): Flow<Resource<MovieDetail>> {
-        return flow {
+    override suspend fun getMovieDetail(token: String, movieId: Int): Flow<Resource<MovieDetail>> =
+        flow {
             emit(Resource.Loading())
 
             val movieDetail = movieDao.getMovieDetail(movieId).toMovieDetail()
@@ -96,16 +88,13 @@ class MovieRepositoryImpl(private val popCornApi: PopCornApi, private val movieD
 
             val newMovieDetail = movieDao.getMovieDetail(movieId).toMovieDetail()
             emit(Resource.Success(newMovieDetail))
-        }.flowOn(Dispatchers.IO)
-    }
+        }
 
-    override suspend fun getLastSeenMovies(): Flow<Resource<List<MovieDetail>>> {
-        return flow {
-            emit(Resource.Loading())
+    override suspend fun getLastSeenMovies(): Flow<Resource<List<MovieDetail>>> = flow {
+        emit(Resource.Loading())
 
-            val lastSeenMovies = movieDao.getLastSeenMovies().map { it.toMovieDetail() }
+        val lastSeenMovies = movieDao.getLastSeenMovies().map { it.toMovieDetail() }
 
-            emit(Resource.Success(lastSeenMovies))
-        }.flowOn(Dispatchers.IO)
+        emit(Resource.Success(lastSeenMovies))
     }
 }

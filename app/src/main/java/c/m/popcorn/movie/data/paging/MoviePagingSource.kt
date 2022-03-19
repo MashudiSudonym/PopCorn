@@ -7,56 +7,24 @@ import c.m.popcorn.movie.domain.model.result.MovieResults
 
 class MoviePagingSource(
     private val popCornApi: PopCornApi,
-    private val querySearch: String,
-    private val token: String,
-    private val page: Int
+    private val token: String
 ) :
     PagingSource<Int, MovieResults>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieResults> {
         return try {
-            val position = params.key ?: page
-
-            if (querySearch.isBlank()) {
-                // Paging for movie discover data
-                val response = popCornApi.movieDiscover(token, position).toMovieDiscover()
-                val nextKey = if (response.results.orEmpty().isEmpty()) {
-                    null
-                } else {
-                    position.plus(
-                        (params.loadSize.div(
-                            response.totalPages ?: page
-                        ))
-                    )
-                }
-
-                LoadResult.Page(
-                    data = response.results.orEmpty(),
-                    prevKey = if (position == page) null else position.minus(
-                        page
-                    ),
-                    nextKey = nextKey
-                )
+            val position = params.key ?: 1
+            val response = popCornApi.movieDiscover(token, position).toMovieDiscover()
+            val nextKey = if (response.results.orEmpty().isEmpty()) {
+                null
             } else {
-                // Paging for searching movie data
-                val response = popCornApi.searchMovies(token, querySearch, position).toMovieSearch()
-                val nextKey = if (response.results.orEmpty().isEmpty()) {
-                    null
-                } else {
-                    position.plus(
-                        (params.loadSize.div(
-                            response.totalPages ?: page
-                        ))
-                    )
-                }
-
-                LoadResult.Page(
-                    data = response.results.orEmpty(),
-                    prevKey = if (position == page) null else position.minus(
-                        page
-                    ),
-                    nextKey = nextKey
-                )
+                position.plus(1)
             }
+
+            LoadResult.Page(
+                data = response.results.orEmpty(),
+                prevKey = null,
+                nextKey = nextKey
+            )
 
         } catch (e: Exception) {
             LoadResult.Error(e)
@@ -65,8 +33,8 @@ class MoviePagingSource(
 
     override fun getRefreshKey(state: PagingState<Int, MovieResults>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
-            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(page)
-                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(page)
+            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
+                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
         }
     }
 }
