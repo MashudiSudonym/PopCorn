@@ -16,19 +16,20 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.compose.collectAsLazyPagingItems
 import c.m.popcorn.R
 import c.m.popcorn.core.presentation.custom.DefaultAppBar
 import c.m.popcorn.core.presentation.custom.LoadingIndicator
 import c.m.popcorn.core.presentation.custom.TextContentTitle
 import c.m.popcorn.core.util.UIEvent
+import c.m.popcorn.movie.presentation.state.MovieDiscoverListState
 import c.m.popcorn.movie.presentation.state.MovieLastSeenListState
-import c.m.popcorn.movie.presentation.state.MovieListState
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun MovieScreen(title: String?, icon: ImageVector) {
     val movieViewModel: MovieViewModel = hiltViewModel()
-    val movieListState by movieViewModel.movieListState.collectAsState()
+    val movieDiscoverListState by movieViewModel.movieDiscoverState.collectAsState()
     val movieLastSeenListState by movieViewModel.movieLastSeenState.collectAsState()
     val scaffoldState = rememberScaffoldState()
 
@@ -44,14 +45,14 @@ fun MovieScreen(title: String?, icon: ImageVector) {
         },
         modifier = Modifier.fillMaxSize()
     ) {
-        MovieContents(movieLastSeenListState, movieListState)
+        MovieContents(movieLastSeenListState, movieDiscoverListState)
     }
 }
 
 @Composable
 private fun MovieContents(
     movieLastSeenListState: MovieLastSeenListState,
-    movieListState: MovieListState
+    movieDiscoverListState: MovieDiscoverListState
 ) {
     Box(modifier = Modifier.background(MaterialTheme.colors.background)) {
         Column(
@@ -68,19 +69,21 @@ private fun MovieContents(
             }
 
             // List Movies
-            ListMovies(movieListState)
+            DiscoverMovies(movieDiscoverListState)
         }
     }
 }
 
 @Composable
-private fun ListMovies(movieListState: MovieListState) {
+private fun DiscoverMovies(movieDiscoverListState: MovieDiscoverListState) {
     TextContentTitle(title = "List Movies")
 
     Spacer(modifier = Modifier.height(16.dp))
 
-    if (movieListState.isLoading) {
+    if (movieDiscoverListState.isLoading) {
         LoadingIndicator()
+    }else {
+        MovieListItems(items = movieDiscoverListState.movieDiscoverItems.collectAsLazyPagingItems())
     }
 }
 

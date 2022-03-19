@@ -3,20 +3,22 @@ package c.m.popcorn.movie.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.map
 import c.m.popcorn.R
 import c.m.popcorn.core.common.Constants
 import c.m.popcorn.core.common.Resource
+import c.m.popcorn.core.data.remote.PopCornApi
+import c.m.popcorn.core.util.UIText
 import c.m.popcorn.movie.data.local.MovieDao
 import c.m.popcorn.movie.data.paging.MoviePagingSource
-import c.m.popcorn.core.data.remote.PopCornApi
 import c.m.popcorn.movie.domain.model.detail.MovieDetail
 import c.m.popcorn.movie.domain.model.result.MovieResults
 import c.m.popcorn.movie.domain.repository.MovieRepository
-import c.m.popcorn.core.util.UIText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import retrofit2.HttpException
 import java.io.IOException
 
