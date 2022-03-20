@@ -82,7 +82,6 @@ private fun DiscoverMovies(movieDiscoverListState: MovieDiscoverListState) {
     when {
         movieDiscoverListState.isLoading -> LoadingIndicator()
         movieDiscoverListState.isError -> TextContentTitle(title = "Error")
-        movieDiscoverItems.itemCount == 0 -> TextContentTitle(title = "No Data")
         else -> MovieListItems(items = movieDiscoverItems)
     }
 }
