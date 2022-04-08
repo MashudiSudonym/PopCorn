@@ -5,6 +5,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -57,8 +58,13 @@ fun MovieDiscoverItem(movieResults: MovieResults) {
             placeHolder = ImageBitmap.imageResource(R.mipmap.ic_launcher_foreground),
             error = ImageVector.vectorResource(R.drawable.ic_baseline_warning_24),
         )
-        Column(horizontalAlignment = Alignment.Start, verticalArrangement = Arrangement.Bottom) {
-            TextContentTitle(title = movieResults.originalTitle ?: "Untitled")
+        Column(
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+            horizontalAlignment = Alignment.Start
+        ) {
+            Spacer(modifier = Modifier.size(248.dp))
+            TextContentTitle(title = movieResults.originalTitle ?: Constants.IS_BLANK)
+            Text(text = movieResults.releaseDate ?: Constants.IS_BLANK)
         }
     }
 }

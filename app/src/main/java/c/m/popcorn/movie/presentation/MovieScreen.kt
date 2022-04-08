@@ -32,15 +32,11 @@ fun MovieScreen(title: String?, icon: ImageVector) {
     val movieDiscoverListState by movieViewModel.movieDiscoverState.collectAsState()
     val movieLastSeenListState by movieViewModel.movieLastSeenState.collectAsState()
 
-    Scaffold(
-        topBar = {
-            DefaultAppBar(
-                title = title ?: stringResource(id = R.string.app_name),
-                icon = icon
-            )
-        },
-        modifier = Modifier.padding(bottom = 56.dp)
-    ) {
+    Column(modifier = Modifier.padding(bottom = 56.dp)) {
+        DefaultAppBar(
+            title = title ?: stringResource(id = R.string.app_name),
+            icon = icon
+        )
         MovieContents(movieLastSeenListState, movieDiscoverListState)
     }
 }
