@@ -3,11 +3,7 @@ package c.m.popcorn.movie.presentation
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.ScaffoldState
-import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -18,13 +14,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import c.m.popcorn.R
-import c.m.popcorn.core.presentation.custom.DefaultAppBar
-import c.m.popcorn.core.presentation.custom.LoadingIndicator
-import c.m.popcorn.core.presentation.custom.TextContentTitle
-import c.m.popcorn.core.util.UIEvent
+import c.m.popcorn.common.presentation.custom.DefaultAppBar
+import c.m.popcorn.common.presentation.custom.LoadingIndicator
+import c.m.popcorn.common.presentation.custom.TextContentTitle
 import c.m.popcorn.movie.presentation.state.MovieDiscoverListState
 import c.m.popcorn.movie.presentation.state.MovieLastSeenListState
-import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun MovieScreen(title: String?, icon: ImageVector) {

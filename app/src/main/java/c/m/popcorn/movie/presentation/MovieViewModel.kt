@@ -2,9 +2,9 @@ package c.m.popcorn.movie.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import c.m.popcorn.core.common.Constants
-import c.m.popcorn.core.common.Resource
-import c.m.popcorn.core.util.UIEvent
+import c.m.popcorn.common.util.Constants
+import c.m.popcorn.common.util.Resource
+import c.m.popcorn.common.util.UIEvent
 import c.m.popcorn.movie.domain.use_case.get_last_seen_movies_use_case.GetLastSeenMoviesUseCase
 import c.m.popcorn.movie.domain.use_case.get_movie_discover_use_case.GetMovieDiscoverUseCase
 import c.m.popcorn.movie.presentation.state.MovieDiscoverListState

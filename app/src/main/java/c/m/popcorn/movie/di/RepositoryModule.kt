@@ -1,7 +1,7 @@
 package c.m.popcorn.movie.di
 
 import c.m.popcorn.movie.data.local.MovieDao
-import c.m.popcorn.core.data.remote.PopCornApi
+import c.m.popcorn.movie.data.remote.MoviePopCornApi
 import c.m.popcorn.movie.data.repository.MovieRepositoryImpl
 import c.m.popcorn.movie.domain.repository.MovieRepository
 import dagger.Module
@@ -15,7 +15,7 @@ import javax.inject.Singleton
 object RepositoryModule {
     @Provides
     @Singleton
-    fun provideMovieRepository(popCornApi: PopCornApi, movieDao: MovieDao): MovieRepository {
-        return MovieRepositoryImpl(popCornApi, movieDao)
+    fun provideMovieRepository(moviePopCornApi: MoviePopCornApi, movieDao: MovieDao): MovieRepository {
+        return MovieRepositoryImpl(moviePopCornApi, movieDao)
     }
 }

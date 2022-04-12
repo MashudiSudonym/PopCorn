@@ -4,9 +4,9 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import c.m.popcorn.R
-import c.m.popcorn.core.common.Resource
-import c.m.popcorn.core.data.remote.PopCornApi
-import c.m.popcorn.core.util.UIText
+import c.m.popcorn.common.util.Resource
+import c.m.popcorn.movie.data.remote.MoviePopCornApi
+import c.m.popcorn.common.util.UIText
 import c.m.popcorn.movie.data.local.MovieDao
 import c.m.popcorn.movie.data.paging.MoviePagingSource
 import c.m.popcorn.movie.domain.model.detail.MovieDetail
@@ -18,7 +18,7 @@ import retrofit2.HttpException
 import java.io.IOException
 import java.net.UnknownHostException
 
-class MovieRepositoryImpl(private val popCornApi: PopCornApi, private val movieDao: MovieDao) :
+class MovieRepositoryImpl(private val moviePopCornApi: MoviePopCornApi, private val movieDao: MovieDao) :
     MovieRepository {
     override suspend fun getMovieDiscover(
         token: String,
@@ -31,7 +31,7 @@ class MovieRepositoryImpl(private val popCornApi: PopCornApi, private val movieD
                 val pagingData = Pager(config = PagingConfig(pageSize = 2),
                     pagingSourceFactory = {
                         MoviePagingSource(
-                            popCornApi = popCornApi,
+                            moviePopCornApi = moviePopCornApi,
                             token = token
                         )
                     }
@@ -67,7 +67,7 @@ class MovieRepositoryImpl(private val popCornApi: PopCornApi, private val movieD
             emit(Resource.Loading(data = movieDetail))
 
             try {
-                val remoteMovieDetail = popCornApi.movieDetail(token, movieId)
+                val remoteMovieDetail = moviePopCornApi.movieDetail(token, movieId)
 
                 movieDao.updateMovieDetail(movieId, remoteMovieDetail.toMovieDetailEntity())
             } catch (e: HttpException) {

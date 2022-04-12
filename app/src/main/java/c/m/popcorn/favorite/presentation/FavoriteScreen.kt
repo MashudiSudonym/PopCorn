@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import c.m.popcorn.R
-import c.m.popcorn.core.presentation.custom.DefaultAppBar
+import c.m.popcorn.common.presentation.custom.DefaultAppBar
 
 @Composable
 fun FavoriteScreen(title: String?, icon: ImageVector) {

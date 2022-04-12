@@ -1,7 +1,7 @@
 package c.m.popcorn.movie.domain.repository
 
 import androidx.paging.PagingData
-import c.m.popcorn.core.common.Resource
+import c.m.popcorn.common.util.Resource
 import c.m.popcorn.movie.domain.model.detail.MovieDetail
 import c.m.popcorn.movie.domain.model.result.MovieResults
 import kotlinx.coroutines.flow.Flow

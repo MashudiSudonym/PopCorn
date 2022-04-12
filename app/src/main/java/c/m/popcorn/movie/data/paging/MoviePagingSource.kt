@@ -2,18 +2,18 @@ package c.m.popcorn.movie.data.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import c.m.popcorn.core.data.remote.PopCornApi
+import c.m.popcorn.movie.data.remote.MoviePopCornApi
 import c.m.popcorn.movie.domain.model.result.MovieResults
 
 class MoviePagingSource(
-    private val popCornApi: PopCornApi,
+    private val moviePopCornApi: MoviePopCornApi,
     private val token: String
 ) :
     PagingSource<Int, MovieResults>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieResults> {
         return try {
             val position = params.key ?: 1
-            val response = popCornApi.movieDiscover(token, position).toMovieDiscover()
+            val response = moviePopCornApi.movieDiscover(token, position).toMovieDiscover()
             val nextKey = if (response.results.orEmpty().isEmpty()) {
                 null
             } else {

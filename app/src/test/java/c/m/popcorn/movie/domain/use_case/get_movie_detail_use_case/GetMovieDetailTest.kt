@@ -1,11 +1,11 @@
 package c.m.popcorn.movie.domain.use_case.get_movie_detail_use_case
 
 import c.m.popcorn.R
-import c.m.popcorn.core.common.Constants
+import c.m.popcorn.common.util.Constants
 import c.m.popcorn.movie.data.local.entity.MovieDetailEntity
-import c.m.popcorn.core.data.repository.FakeMovieRepository
+import c.m.popcorn.common.data.repository.FakeMovieRepository
 import c.m.popcorn.dummy.FakeDummyMovieData
-import c.m.popcorn.core.util.UIText
+import c.m.popcorn.common.util.UIText
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.runBlocking

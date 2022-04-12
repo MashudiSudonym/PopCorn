@@ -18,8 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
 import c.m.popcorn.R
-import c.m.popcorn.core.common.Constants
-import c.m.popcorn.core.presentation.custom.TextContentTitle
+import c.m.popcorn.common.util.Constants
+import c.m.popcorn.common.presentation.custom.TextContentTitle
 import c.m.popcorn.movie.domain.model.result.MovieResults
 import com.skydoves.landscapist.CircularReveal
 import com.skydoves.landscapist.coil.CoilImage

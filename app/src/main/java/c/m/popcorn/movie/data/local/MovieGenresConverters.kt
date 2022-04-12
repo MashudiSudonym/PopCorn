@@ -2,7 +2,7 @@ package c.m.popcorn.movie.data.local
 
 import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
-import c.m.popcorn.core.data.util.JsonParser
+import c.m.popcorn.common.data.local.util.JsonParser
 import c.m.popcorn.movie.domain.model.detail.MovieGenres
 import com.google.gson.reflect.TypeToken
 

@@ -1,6 +1,6 @@
 package c.m.popcorn.movie.domain.use_case.get_last_seen_movies_use_case
 
-import c.m.popcorn.core.data.repository.FakeMovieRepository
+import c.m.popcorn.common.data.repository.FakeMovieRepository
 import c.m.popcorn.movie.domain.model.detail.MovieDetail
 import c.m.popcorn.dummy.FakeDummyMovieData
 import com.google.common.truth.Truth
